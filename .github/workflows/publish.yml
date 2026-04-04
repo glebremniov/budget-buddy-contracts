@@ -9,6 +9,8 @@ jobs:
   # ── Gate: lint + validate before anything is published ───────────────────────
   validate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
 
