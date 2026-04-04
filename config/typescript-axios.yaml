@@ -1,0 +1,11 @@
+# openapi-generator config for typescript-axios
+# Consumers: web clients (React, etc.)
+# Published to GitHub Packages as @glebremniov/budget-buddy-contracts
+npmName: "@glebremniov/budget-buddy-contracts"
+npmVersion: "1.0.0"
+supportsES6: true
+withSeparateModelsAndApi: true
+apiPackage: api
+modelPackage: model
+# Wraps all parameters in a single options object — avoids long positional arg lists
+useSingleRequestParameter: true

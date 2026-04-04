@@ -2,10 +2,55 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Repository Purpose
+## What this repo is
 
-This repository (`budget-buddy-contracts`) appears to be a contracts/shared types package for the Budget Buddy project. No code has been added yet.
+API-first contracts for Budget Buddy. The OpenAPI spec in `specs/openapi.yaml` is the single source of truth. From it, three clients are generated:
 
-## Notes
+| Target | Generator | Output | Published to |
+|--------|-----------|--------|-------------|
+| TypeScript | `typescript-axios` | `generated/typescript/` | GitHub Packages (npm) |
+| Java Spring Boot | `spring` (interfaceOnly) | `generated/java/` | GitHub Packages (Maven) |
+| iOS/Swift | `swift5` (urlsession) | `Sources/BudgetBuddyContracts/` | Git repo (SPM) |
 
-- This repository is currently empty. Add build, lint, and test commands here once the project is initialized.
+`generated/` is gitignored — TypeScript and Java are ephemeral CI artifacts. `Sources/BudgetBuddyContracts/` is committed because Swift Package Manager requires sources tracked in git.
+
+## Commands
+
+```bash
+npm install               # Install openapi-generator-cli and spectral
+
+npm run lint              # Lint spec with Spectral (must pass before PRs)
+npm run validate          # Structural validation via openapi-generator
+
+npm run generate:ts       # → generated/typescript/
+npm run generate:java     # → generated/java/
+npm run generate:swift    # → Sources/BudgetBuddyContracts/  (commit this)
+npm run generate          # All three
+```
+
+## Release workflow
+
+1. Edit `specs/openapi.yaml`
+2. `npm run lint && npm run validate`
+3. `npm run generate:swift` → commit `Sources/BudgetBuddyContracts/`
+4. Bump `version` in `package.json` and add entry to `CHANGELOG.md`
+5. `git tag v<version> && git push --follow-tags`
+6. CI generates TypeScript and Java, then publishes both to GitHub Packages
+
+## Architecture
+
+- `specs/openapi.yaml` — OpenAPI 3.1.0, monolithic single file with internal `$ref` only
+- `config/*.yaml` — per-generator options (package names, base packages, output style)
+- `openapitools.json` — pins openapi-generator version (currently 7.21.0; needed for OAS 3.1 `type: [string, "null"]`)
+- `Package.swift` — makes this repo a valid Swift Package; points to `Sources/BudgetBuddyContracts/`
+- `.spectral.yaml` — enforces `operationId` on every operation (error) and tags (warn); generators rely on both
+- `.github/workflows/validate.yml` — runs lint + validate on PRs that touch `specs/` or `config/`
+- `.github/workflows/publish.yml` — on `v*` tag: generates and publishes TypeScript (npm) + Java (Maven) to GitHub Packages using `GITHUB_TOKEN`
+
+## Spec conventions
+
+- All operations have an `operationId` (required by Spectral, used for generated method names)
+- Error responses use `application/problem+json` with the `Problem` schema (RFC 7807)
+- Amounts are `integer` in minor currency units (e.g. `1299` = €12.99)
+- Write schemas (POST/PUT body) and Update schemas (PATCH body) are separate from read schemas
+- Auth endpoints override global security with `security: []`

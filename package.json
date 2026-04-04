@@ -1,0 +1,18 @@
+{
+  "name": "@glebremniov/budget-buddy-contracts",
+  "version": "1.0.0",
+  "description": "API-first contracts for Budget Buddy — OpenAPI spec + generated clients",
+  "private": true,
+  "scripts": {
+    "validate": "openapi-generator-cli validate -i specs/openapi.yaml",
+    "lint": "spectral lint specs/openapi.yaml --ruleset .spectral.yaml",
+    "generate:ts": "openapi-generator-cli generate -i specs/openapi.yaml -g typescript-axios -o generated/typescript -c config/typescript-axios.yaml",
+    "generate:java": "openapi-generator-cli generate -i specs/openapi.yaml -g spring -o generated/java -c config/spring-server.yaml",
+    "generate:swift": "openapi-generator-cli generate -i specs/openapi.yaml -g swift5 -o Sources/BudgetBuddyContracts -c config/swift5.yaml",
+    "generate": "npm run generate:ts && npm run generate:java && npm run generate:swift"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.31.0",
+    "@stoplight/spectral-cli": "^6.15.0"
+  }
+}

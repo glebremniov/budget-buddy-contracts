@@ -1,0 +1,7 @@
+extends: ["spectral:oas"]
+rules:
+  # Generators rely on operationId for method naming — make missing IDs a hard error
+  operation-operationId: error
+  # Tags group operations into separate API classes in generated code
+  operation-tags: warn
+  operation-tag-defined: warn

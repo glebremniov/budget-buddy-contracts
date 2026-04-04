@@ -1,0 +1,20 @@
+# openapi-generator config for spring (server stubs)
+# Consumers: Java Spring Boot backend — implements the generated API interfaces
+# Published to GitHub Packages (Maven) as com.budgetbuddy:budget-buddy-contracts
+#
+# Note: generateSupportingFiles is intentionally not set here (defaults to true).
+# The backend's Gradle task sets it to false because Gradle owns the project wrapper;
+# here we need the generated pom.xml so CI can run `mvn deploy`.
+groupId: com.budgetbuddy
+artifactId: budget-buddy-contracts
+artifactVersion: "1.0.0"
+apiPackage: com.budget.buddy.budget_buddy_api.generated.api
+modelPackage: com.budget.buddy.budget_buddy_api.generated.model
+interfaceOnly: true
+useTags: true
+useSpringBoot4: true
+useJakartaEe: true
+openApiNullable: true
+skipOperationExample: true
+sourceFolder: src/main/java
+# useJSpecify: true  # https://github.com/OpenAPITools/openapi-generator/pull/23256
