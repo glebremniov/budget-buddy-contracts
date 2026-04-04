@@ -1,3 +1,14 @@
+# Dependencies
+node_modules/
+
+# Generated client artifacts (built and published by CI — not tracked in git)
+# Exception: Sources/BudgetBuddyContracts/ is tracked (required for Swift Package Manager)
+generated/
+
+# openapi-generator metadata
+.openapi-generator/
+.openapi-generator-ignore
+
 ### macOS ###
 # General
 .DS_Store
