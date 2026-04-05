@@ -61,9 +61,13 @@ jobs:
             -o generated/typescript \
             -c config/typescript-axios.yaml \
             --additional-properties=npmVersion=${{ steps.version.outputs.VERSION }}
-          # Patch deprecated moduleResolution emitted by generator (node = node10, removed in TS 7)
-          sed -i 's/"moduleResolution": "node"/"moduleResolution": "node16"/g' \
-            generated/typescript/tsconfig.json \
+          # Patch deprecated moduleResolution emitted by generator ("node" = node10, removed in TS 7).
+          # tsconfig.json (CJS):  node10 is compatible with module: commonjs.
+          # tsconfig.esm.json (ESM): bundler is compatible with module: esnext.
+          # node16 is NOT used: it requires module: node16, which breaks both builds.
+          sed -i 's/"moduleResolution": "node"/"moduleResolution": "node10"/g' \
+            generated/typescript/tsconfig.json 2>/dev/null || true
+          sed -i 's/"moduleResolution": "node"/"moduleResolution": "bundler"/g' \
             generated/typescript/tsconfig.esm.json 2>/dev/null || true
 
       - name: Publish to GitHub Packages
