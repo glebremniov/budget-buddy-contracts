@@ -3,7 +3,10 @@ openapi: 3.1.0
 info:
   title: Budget Buddy API
   description: REST API for Budget Buddy.
-  version: "1.0.0"
+  version: "1.0.1"
+  contact:
+    name: Budget Buddy
+    url: https://github.com/glebremniov/budget-buddy-contracts
 
 servers:
   - url: https://api.example.com
@@ -24,6 +27,7 @@ paths:
     post:
       tags: [ auth ]
       summary: Authenticate user
+      description: Authenticates a user with username and password, returning access and refresh tokens.
       operationId: loginUser
       security: [ ]
       requestBody:
@@ -46,6 +50,7 @@ paths:
     post:
       tags: [ auth ]
       summary: Refresh access token
+      description: Exchanges a valid refresh token for a new access token.
       operationId: refreshToken
       security: [ ]
       requestBody:
@@ -68,6 +73,7 @@ paths:
     post:
       tags: [ auth ]
       summary: Register new user
+      description: Creates a new user account with the provided credentials.
       operationId: registerUser
       security: [ ]
       requestBody:
@@ -88,6 +94,7 @@ paths:
     post:
       tags: [ auth ]
       summary: Logout user and invalidate refresh tokens
+      description: Invalidates the current user's refresh tokens, ending their session.
       operationId: logoutUser
       responses:
         "204":
@@ -99,6 +106,7 @@ paths:
     get:
       tags: [ categories ]
       summary: List categories
+      description: Returns a paginated list of categories for the authenticated user.
       operationId: listCategories
       parameters:
         - $ref: "#/components/parameters/limit"
@@ -116,6 +124,7 @@ paths:
     post:
       tags: [ categories ]
       summary: Create category
+      description: Creates a new category and returns the created resource with its assigned ID.
       operationId: createCategory
       requestBody:
         required: true
@@ -148,6 +157,7 @@ paths:
     get:
       tags: [ categories ]
       summary: Get category
+      description: Returns a single category by its UUID.
       operationId: getCategory
       responses:
         "200":
@@ -164,6 +174,7 @@ paths:
     put:
       tags: [ categories ]
       summary: Replace category
+      description: Fully replaces a category's data (PUT semantics).
       operationId: replaceCategory
       requestBody:
         required: true
@@ -188,6 +199,7 @@ paths:
     patch:
       tags: [ categories ]
       summary: Partially update category
+      description: Partially updates a category; only provided fields are modified.
       operationId: updateCategory
       requestBody:
         required: true
@@ -212,6 +224,7 @@ paths:
     delete:
       tags: [ categories ]
       summary: Delete category
+      description: Permanently deletes a category by its UUID.
       operationId: deleteCategory
       responses:
         "204":
@@ -225,6 +238,7 @@ paths:
     get:
       tags: [ transactions ]
       summary: List transactions
+      description: Returns a paginated, filterable list of transactions for the authenticated user.
       operationId: listTransactions
       parameters:
         - $ref: "#/components/parameters/limit"
@@ -269,6 +283,7 @@ paths:
     post:
       tags: [ transactions ]
       summary: Create transaction
+      description: Records a new transaction and returns the created resource.
       operationId: createTransaction
       requestBody:
         required: true
@@ -300,6 +315,7 @@ paths:
     get:
       tags: [ transactions ]
       summary: Get transaction
+      description: Returns a single transaction by its UUID.
       operationId: getTransaction
       responses:
         "200":
@@ -316,6 +332,7 @@ paths:
     put:
       tags: [ transactions ]
       summary: Replace transaction
+      description: Fully replaces a transaction's data (PUT semantics).
       operationId: replaceTransaction
       requestBody:
         required: true
@@ -340,6 +357,7 @@ paths:
     patch:
       tags: [ transactions ]
       summary: Partially update transaction
+      description: Partially updates a transaction; only provided fields are modified.
       operationId: updateTransaction
       requestBody:
         required: true
@@ -364,6 +382,7 @@ paths:
     delete:
       tags: [ transactions ]
       summary: Delete transaction
+      description: Permanently deletes a transaction by its UUID.
       operationId: deleteTransaction
       responses:
         "204":

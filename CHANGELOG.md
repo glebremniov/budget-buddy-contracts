@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-04-05
+
+### Added
+- `description` field on all 16 operations (resolves Spectral `operation-description` warnings)
+- `contact` field in `info` object (resolves Spectral `info-contact` warning)
+
 ## [1.0.0] - 2026-04-04
 
 ### Added
