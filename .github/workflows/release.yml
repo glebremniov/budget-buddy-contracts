@@ -49,12 +49,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
 
-      - name: Detect whether a release was created
-        id: after
+      - name: Detect release
+        id: detect
         run: |
-          VERSION="$(node -p "require('./package.json').version")"
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          if [ "$VERSION" != "${{ steps.before.outputs.version }}" ]; then
+          if git describe --tags --exact-match HEAD >/dev/null 2>&1; then
             echo "released=true" >> "$GITHUB_OUTPUT"
           else
             echo "released=false" >> "$GITHUB_OUTPUT"
