@@ -84,13 +84,19 @@ Add to your `pom.xml`:
 
 1. **Modify the Spec:** Edit `specs/openapi.yaml`.
 2. **Sync Swift:** Run `npm run generate:swift` and commit the changes in `Sources/`.
-3. **Version Bump:** Update `version` in `package.json` and document changes in `CHANGELOG.md`.
-4. **Publish:**
-   ```bash
-   git tag v1.1.0
-   git push origin v1.1.0
-   ```
-   *The GitHub Action will automatically generate and publish the TypeScript and Java artifacts to GitHub Packages.*
+3. **Use Conventional Commits:** Merge changes to `main` with commit messages such as `feat(spec): add category color` or `fix(auth): clarify refresh token schema`.
+4. **Automatic Release:** The `Release` GitHub Action runs on pushes to `main`, calculates the next semantic version, updates `CHANGELOG.md`, creates the Git tag and GitHub Release, then publishes:
+   - the generated TypeScript client to GitHub Packages
+   - the generated Java Spring stubs to GitHub Packages
+
+### Commit Message Enforcement
+
+- Local commits are checked by Husky + Commitlint.
+- Pull requests are checked again in CI, so invalid commit messages cannot be merged accidentally.
+- Release impact follows Conventional Commits:
+  - `fix:` and `perf:` => patch
+  - `feat:` => minor
+  - `!` or `BREAKING CHANGE:` => major
 
 ---
 

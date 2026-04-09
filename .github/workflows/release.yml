@@ -1,0 +1,108 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@glebremniov"
+          cache: "npm"
+
+      - uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - run: npm ci
+
+      - name: Capture current version
+        id: before
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Lint spec
+        run: npm run lint
+
+      - name: Validate spec
+        run: npm run validate
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+
+      - name: Detect whether a release was created
+        id: after
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if [ "$VERSION" != "${{ steps.before.outputs.version }}" ]; then
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "released=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate TypeScript client
+        if: steps.after.outputs.released == 'true'
+        run: |
+          npm run generate:ts
+          jq '.compilerOptions.moduleResolution = "node10" | .compilerOptions.ignoreDeprecations = "6.0"' \
+            generated/typescript/tsconfig.json > /tmp/tsconfig.json
+          mv /tmp/tsconfig.json generated/typescript/tsconfig.json
+          jq '.compilerOptions.moduleResolution = "bundler"' \
+            generated/typescript/tsconfig.esm.json > /tmp/tsconfig.esm.json
+          mv /tmp/tsconfig.esm.json generated/typescript/tsconfig.esm.json
+
+      - name: Publish TypeScript package
+        if: steps.after.outputs.released == 'true'
+        working-directory: generated/typescript
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish
+
+      - name: Generate Java Spring stubs
+        if: steps.after.outputs.released == 'true'
+        run: npm run generate:java
+
+      - name: Configure Maven for GitHub Packages
+        if: steps.after.outputs.released == 'true'
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.GITHUB_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+
+      - name: Publish Java package
+        if: steps.after.outputs.released == 'true'
+        working-directory: generated/java
+        run: |
+          mvn deploy \
+            -DaltDeploymentRepository="github::https://maven.pkg.github.com/glebremniov/budget-buddy-contracts" \
+            --no-transfer-progress \
+            -DskipTests

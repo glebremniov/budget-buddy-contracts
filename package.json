@@ -10,20 +10,39 @@
   },
   "typesVersions": {
     "*": {
-      "*": ["./generated/typescript/index.ts"],
-      "models": ["./generated/typescript/model/index.ts"]
+      "*": [
+        "./generated/typescript/index.ts"
+      ],
+      "models": [
+        "./generated/typescript/model/index.ts"
+      ]
     }
   },
   "scripts": {
+    "prepare": "husky",
+    "commitlint": "commitlint --edit",
     "validate": "openapi-generator-cli validate -i specs/openapi.yaml",
     "lint": "spectral lint specs/openapi.yaml --ruleset .spectral.yaml",
     "generate:ts": "openapi-generator-cli generate -i specs/openapi.yaml -g typescript-axios -o generated/typescript -c config/typescript-axios.yaml --additional-properties=npmVersion=$(node -p \"require('./package.json').version\")",
     "generate:java": "openapi-generator-cli generate -i specs/openapi.yaml -g spring -o generated/java -c config/spring-server.yaml --additional-properties=artifactVersion=$(node -p \"require('./package.json').version\")",
     "generate:swift": "openapi-generator-cli generate -i specs/openapi.yaml -g swift6 -o /tmp/budget-buddy-swift -c config/swift6.yaml && rsync -a --delete /tmp/budget-buddy-swift/Sources/BudgetBuddyContracts/ Sources/BudgetBuddyContracts/",
-    "generate": "npm run generate:ts && npm run generate:java && npm run generate:swift"
+    "generate": "npm run generate:ts && npm run generate:java && npm run generate:swift",
+    "release": "semantic-release",
+    "release:dry-run": "semantic-release --dry-run"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@openapitools/openapi-generator-cli": "^2.31.1",
-    "@stoplight/spectral-cli": "^6.15.0"
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.6",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@stoplight/spectral-cli": "^6.15.0",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.9",
+    "semantic-release-openapi": "^1.5.1"
   }
 }

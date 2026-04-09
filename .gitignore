@@ -61,3 +61,6 @@ Temporary Items
 .history
 .ionide
 node_modules
+
+# Husky runtime files are created by `npm install` and should stay local.
+.husky/_/
