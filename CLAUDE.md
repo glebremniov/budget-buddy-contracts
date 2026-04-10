@@ -21,6 +21,7 @@ pnpm install               # Install openapi-generator-cli and spectral
 
 pnpm run lint              # Lint spec with Spectral (must pass before PRs)
 pnpm run validate          # Structural validation via openapi-generator
+pnpm run mock              # Run Prism mock server at http://localhost:4010
 
 pnpm run generate:ts       # → generated/typescript/
 pnpm run generate:java     # → generated/java/

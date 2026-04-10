@@ -48,6 +48,7 @@ pnpm install
 | :--- | :--- |
 | `pnpm run lint` | Lints the spec with Spectral (enforces `operationId` and naming conventions). |
 | `pnpm run validate` | Checks the structural integrity of the OpenAPI document. |
+| `pnpm run mock` | Runs a Prism mock server locally at `http://localhost:4010`. |
 | `pnpm run generate` | Generates all clients (TS, Java, Swift) locally. |
 | `pnpm run generate:swift` | Specifically updates the committed Swift source files. |
 
