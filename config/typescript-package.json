@@ -12,5 +12,8 @@
     "url": "https://github.com/budget-buddy-org/budget-buddy-contracts.git"
   },
   "sideEffects": false,
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
