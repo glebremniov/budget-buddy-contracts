@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - replaced `semantic-release-openapi` (incompatible with semantic-release v25) with a direct `sed` command via `@semantic-release/exec` to bump `specs/openapi.yaml` version during prepare
 - TypeScript and Java clients were never generated or published after a release because all four conditional steps referenced the non-existent step ID `after` instead of `detect`
+- TypeScript build failed at publish time with `Cannot find module 'axios'` because the generated client's dependencies were never installed; added a `pnpm install --no-frozen-lockfile` step in `generated/typescript/` before publishing
+- TypeScript package was being published under the wrong scope (`@glebremniov`) instead of the organisation scope (`@budget-buddy-org`); corrected `npmName` in `config/typescript-axios.yaml`
 - Swift sources (`Sources/BudgetBuddyContracts/`) are now regenerated during the semantic-release prepare phase via `@semantic-release/exec`, ensuring the tagged commit always contains up-to-date generated sources (required for SPM resolution)
 - `@semantic-release/git` was blocked by the branch ruleset PR requirement when pushing the version-bump commit; switched to a GitHub App token (`RELEASE_BOT_ID` + `RELEASE_BOT_PRIVATE_KEY`) via `actions/create-github-app-token` — the app is added to the Ruleset bypass actor list so CI can push directly while the PR requirement still applies to human contributors
 
