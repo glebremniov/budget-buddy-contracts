@@ -73,8 +73,8 @@ Do **not** manually bump versions, tag, or run `generate:swift` before merging �
 - `Package.swift` — makes this repo a valid Swift Package; points to `Sources/BudgetBuddyContracts/`
 - `.spectral.yaml` — enforces `operationId` on every operation (error) and tags (warn); generators rely on both
 - `.github/workflows/validate.yml` — runs lint + validate on PRs that touch `specs/` or `config/`
-- `.github/workflows/release.yml` — on push to `main`: runs semantic-release, then generates and publishes TypeScript (npm) + Java (Maven) to GitHub Packages using `GITHUB_TOKEN`
-- `.releaserc.cjs` — semantic-release plugin config; plugin order matters (openapi → exec/swift → git commit)
+- `.github/workflows/release.yml` — on push to `main`: generates a GitHub App token (`RELEASE_BOT_ID` + `RELEASE_BOT_PRIVATE_KEY` org secrets) to bypass the branch ruleset PR requirement, then runs semantic-release and publishes TypeScript (npm) + Java (Maven) to GitHub Packages
+- `.releaserc.cjs` — semantic-release plugin config; plugin order matters (changelog → npm → exec/swift → git commit → github)
 
 ## Spec conventions
 
