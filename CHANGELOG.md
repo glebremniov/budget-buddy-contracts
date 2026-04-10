@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - migrated package management from `npm` to `pnpm`
 - added local API mocking via Prism (`pnpm run mock`)
-- updated Dependabot to support `pnpm` ecosystem
+- configured Dependabot for `pnpm` support (via `npm` ecosystem)
 - updated Node.js engine requirement to v24+ (LTS)
 - updated Java publish workflow to use Java 25 (LTS)
 - updated all GitHub Actions to their latest versions (checkout@v6, setup-node@v6, setup-java@v5)
