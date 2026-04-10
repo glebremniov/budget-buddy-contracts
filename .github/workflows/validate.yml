@@ -16,16 +16,22 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - uses: pnpm/action-setup@v5
+      - uses: pnpm/action-setup@a8198c4bff370c8506180b035930dea56dbd5288 # v5
         with:
           version: 10
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version: "24"
           cache: "pnpm"
+
+      - uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: "maven"
 
       - run: pnpm install --frozen-lockfile
 
@@ -34,3 +40,9 @@ jobs:
 
       - name: Validate spec
         run: pnpm run validate
+
+      - name: Smoke-test TypeScript generation
+        run: pnpm run generate:ts
+
+      - name: Smoke-test Java generation
+        run: pnpm run generate:java
