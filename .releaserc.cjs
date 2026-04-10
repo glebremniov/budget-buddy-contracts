@@ -11,15 +11,10 @@ module.exports = {
       },
     ],
     [
-      "semantic-release-openapi",
-      {
-        apiSpecFiles: ["specs/openapi.yaml"],
-      },
-    ],
-    [
       "@semantic-release/exec",
       {
-        prepareCmd: "pnpm run generate:swift",
+        prepareCmd:
+          "sed -i 's/^  version: .*/  version: \"${nextRelease.version}\"/' specs/openapi.yaml && pnpm run generate:swift",
       },
     ],
     [

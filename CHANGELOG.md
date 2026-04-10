@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - introduced semantic-release for fully automated versioning and publishing on push to `main`
 
 ### Fixed
-- `specs/openapi.yaml` was never version-bumped in release commits because `semantic-release-openapi` ran after `@semantic-release/git`; reordered plugins so the openapi spec is updated before the commit
+- replaced `semantic-release-openapi` (incompatible with semantic-release v25) with a direct `sed` command via `@semantic-release/exec` to bump `specs/openapi.yaml` version during prepare
 - TypeScript and Java clients were never generated or published after a release because all four conditional steps referenced the non-existent step ID `after` instead of `detect`
 - Swift sources (`Sources/BudgetBuddyContracts/`) are now regenerated during the semantic-release prepare phase via `@semantic-release/exec`, ensuring the tagged commit always contains up-to-date generated sources (required for SPM resolution)
 
