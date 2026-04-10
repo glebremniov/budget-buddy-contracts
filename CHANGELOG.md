@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.3...v1.3.4) (2026-04-10)
+
+
+### Bug Fixes
+
+* explicitly set GITHUB_TOKEN env for Maven publish step ([#45](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/45)) ([616b67c](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/616b67c79bcb543807a2b7b6ece87bd5eddc762b))
+
 ## [1.3.3](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.2...v1.3.3) (2026-04-10)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@budget-buddy-org/budget-buddy-contracts",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "API-first contracts for Budget Buddy — OpenAPI spec + generated clients",
   "private": true,
   "type": "module",
