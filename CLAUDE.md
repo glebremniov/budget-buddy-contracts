@@ -57,13 +57,14 @@ Releases are fully automated via semantic-release on push to `main`.
 3. Commit with a conventional commit message (`feat:`, `fix:`, `feat!:`, etc.) and merge to `main`
 4. CI does the rest:
    - determines next version from commit history
-   - bumps `package.json` and `specs/openapi.yaml`
-   - regenerates Swift sources and includes them in the tagged commit
-   - updates `CHANGELOG.md`
+   - bumps `package.json` on disk (used by generation scripts)
+   - regenerates Swift sources
    - creates the git tag and GitHub Release
    - generates and publishes TypeScript (npm) and Java (Maven) to GitHub Packages
 
 Do **not** manually bump versions, tag, or run `generate:swift` before merging — semantic-release owns all of that.
+
+> Note: `CHANGELOG.md` and `specs/openapi.yaml` are **not** automatically committed back to `main` (branch protection requires signed commits and PRs). Update `CHANGELOG.md` manually in the same PR as spec changes, and bump `specs/openapi.yaml` `info.version` to match `package.json` before merging.
 
 ## Architecture
 
