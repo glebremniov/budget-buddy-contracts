@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.1...v1.3.2) (2026-04-10)
+
+
+### Bug Fixes
+
+* use positional dir arg in pnpm publish ([#41](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/41)) ([f07d9ac](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/f07d9ac2e11a199b011456e7de4f790b8bb5703d))
+
 ## [1.3.1](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.0...v1.3.1) (2026-04-10)
 
 
