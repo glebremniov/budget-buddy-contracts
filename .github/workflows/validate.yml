@@ -31,7 +31,6 @@ jobs:
         with:
           java-version: "25"
           distribution: "temurin"
-          cache: "maven"
 
       - run: pnpm install --frozen-lockfile
 
