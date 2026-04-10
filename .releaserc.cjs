@@ -13,18 +13,29 @@ module.exports = {
       },
     ],
     // Updates openapi.yaml version + regenerates Swift sources (prepare phase)
-    // Generates + publishes TypeScript and Java packages (publish phase)
     [
       "@semantic-release/exec",
       {
         prepareCmd:
           "sed -i 's/^  version: .*/  version: \"${nextRelease.version}\"/' specs/openapi.yaml && pnpm run generate:swift",
+      },
+    ],
+    // Publishes TypeScript package to GitHub Packages (npm)
+    [
+      "@semantic-release/exec",
+      {
         publishCmd: [
-          // TypeScript: generate, stamp version, publish to GitHub Packages (npm)
           "pnpm run generate:ts",
           "jq --arg v '${nextRelease.version}' '.version = $v' config/typescript-package.json > generated/typescript/package.json",
-          "(cd generated/typescript && pnpm publish --no-git-checks)",
-          // Java: generate, publish to GitHub Packages (Maven)
+          "pnpm publish --directory generated/typescript --no-git-checks",
+        ].join(" && "),
+      },
+    ],
+    // Publishes Java package to GitHub Packages (Maven)
+    [
+      "@semantic-release/exec",
+      {
+        publishCmd: [
           "pnpm run generate:java",
           "mvn deploy --file generated/java/pom.xml -s config/maven-settings.xml -DaltDeploymentRepository=github::https://maven.pkg.github.com/budget-buddy-org/budget-buddy-contracts --no-transfer-progress -DskipTests",
         ].join(" && "),

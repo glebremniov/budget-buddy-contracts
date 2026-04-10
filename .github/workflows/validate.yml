@@ -6,6 +6,8 @@ on:
       - "specs/**"
       - "config/**"
       - ".spectral.yaml"
+      - "openapi-ts.config.ts"
+      - "openapitools.json"
 
 permissions:
   contents: read

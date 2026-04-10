@@ -4,9 +4,6 @@
   "description": "API-first contracts for Budget Buddy — OpenAPI spec + generated clients",
   "private": true,
   "type": "module",
-  "exports": {
-    ".": "./generated/typescript/index.ts"
-  },
   "scripts": {
     "prepare": "husky",
     "commitlint": "commitlint --edit",
