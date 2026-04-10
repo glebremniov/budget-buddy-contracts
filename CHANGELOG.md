@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.2...v1.3.3) (2026-04-10)
+
+
+### Bug Fixes
+
+* trigger build ([5c2d6db](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/5c2d6db15a92a35e87435a7a4500df8f12f47b92))
+
 ## [1.3.2](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.1...v1.3.2) (2026-04-10)
 
 
