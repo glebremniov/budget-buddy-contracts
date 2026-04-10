@@ -11,7 +11,7 @@ updates:
     schedule:
       interval: "weekly"
 
-  # Maintain dependencies for npm
+  # Maintain dependencies for npm (Dependabot handles pnpm via the npm ecosystem)
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
