@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.2.2...v1.3.0) (2026-04-10)
+
+
+### Features
+
+* clean up commands ([a73f63f](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/a73f63f8c0ef68987340e1c9bdcaedaf3d4f8635))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
