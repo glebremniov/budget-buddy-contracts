@@ -9,22 +9,22 @@ import Foundation
 
 public struct PaginationMeta: Sendable, Codable, Hashable {
 
+    /** Zero-based page number returned in this response. */
+    public var page: Int
     /** The page size used for this response. */
-    public var limit: Int
-    /** The number of items skipped before this page. */
-    public var offset: Int
+    public var size: Int
     /** Total number of items matching the request across all pages. */
     public var total: Int64
 
-    public init(limit: Int, offset: Int, total: Int64) {
-        self.limit = limit
-        self.offset = offset
+    public init(page: Int, size: Int, total: Int64) {
+        self.page = page
+        self.size = size
         self.total = total
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case limit
-        case offset
+        case page
+        case size
         case total
     }
 
@@ -32,8 +32,8 @@ public struct PaginationMeta: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(limit, forKey: .limit)
-        try container.encode(offset, forKey: .offset)
+        try container.encode(page, forKey: .page)
+        try container.encode(size, forKey: .size)
         try container.encode(total, forKey: .total)
     }
 }

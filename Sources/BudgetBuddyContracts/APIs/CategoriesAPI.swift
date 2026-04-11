@@ -139,13 +139,13 @@ open class CategoriesAPI {
     /**
      List categories
      
-     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
-     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
+     - parameter page: (query) Zero-based page number. (optional, default to 0)
+     - parameter size: (query) Maximum number of items to return. (optional, default to 20)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedCategories
      */
-    open class func listCategories(limit: Int? = nil, offset: Int? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedCategories {
-        return try await listCategoriesWithRequestBuilder(limit: limit, offset: offset, apiConfiguration: apiConfiguration).execute().body
+    open class func listCategories(page: Int? = nil, size: Int? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedCategories {
+        return try await listCategoriesWithRequestBuilder(page: page, size: size, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -155,20 +155,20 @@ open class CategoriesAPI {
      - Bearer Token:
        - type: http
        - name: BearerAuth
-     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
-     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
+     - parameter page: (query) Zero-based page number. (optional, default to 0)
+     - parameter size: (query) Maximum number of items to return. (optional, default to 20)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedCategories> 
      */
-    open class func listCategoriesWithRequestBuilder(limit: Int? = nil, offset: Int? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedCategories> {
+    open class func listCategoriesWithRequestBuilder(page: Int? = nil, size: Int? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedCategories> {
         let localVariablePath = "/v1/categories"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "size": (wrappedValue: size?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

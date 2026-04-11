@@ -147,8 +147,8 @@ open class TransactionsAPI {
     /**
      List transactions
      
-     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
-     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
+     - parameter page: (query) Zero-based page number. (optional, default to 0)
+     - parameter size: (query) Maximum number of items to return. (optional, default to 20)
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
@@ -156,8 +156,8 @@ open class TransactionsAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedTransactions
      */
-    open class func listTransactions(limit: Int? = nil, offset: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedTransactions {
-        return try await listTransactionsWithRequestBuilder(limit: limit, offset: offset, categoryId: categoryId, start: start, end: end, sort: sort, apiConfiguration: apiConfiguration).execute().body
+    open class func listTransactions(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedTransactions {
+        return try await listTransactionsWithRequestBuilder(page: page, size: size, categoryId: categoryId, start: start, end: end, sort: sort, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -167,8 +167,8 @@ open class TransactionsAPI {
      - Bearer Token:
        - type: http
        - name: BearerAuth
-     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
-     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
+     - parameter page: (query) Zero-based page number. (optional, default to 0)
+     - parameter size: (query) Maximum number of items to return. (optional, default to 20)
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
@@ -176,15 +176,15 @@ open class TransactionsAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedTransactions> 
      */
-    open class func listTransactionsWithRequestBuilder(limit: Int? = nil, offset: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedTransactions> {
+    open class func listTransactionsWithRequestBuilder(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedTransactions> {
         let localVariablePath = "/v1/transactions"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "size": (wrappedValue: size?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "categoryId": (wrappedValue: categoryId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "start": (wrappedValue: start?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "end": (wrappedValue: end?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),

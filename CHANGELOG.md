@@ -1,3 +1,17 @@
+## [2.0.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.4.2...v2.0.0) (2026-04-11)
+
+### ⚠ BREAKING CHANGES
+
+* switch pagination from offset/limit to page/size (closes #62) (#63)
+
+### Features
+
+* switch pagination from offset/limit to page/size (closes [#62](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/62)) ([#63](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/63)) ([528f60d](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/528f60d3b9f4783c3a2ca842f1e1ac6e13a5d285))
+
+### Bug Fixes
+
+* **release:** switch to conventionalcommits preset to support ! breaking changes ([#64](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/64)) ([4654a66](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/4654a661f2db9a8215534755373b9d89f50a3e1b))
+
 ## [1.4.2](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.4.1...v1.4.2) (2026-04-11)
 
 
