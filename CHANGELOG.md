@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.4.1...v1.4.2) (2026-04-11)
+
+
+### Bug Fixes
+
+* **ci:** remove unused permissions, add lint gate, document publish recovery (closes [#48](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/48)) ([#61](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/61)) ([504cda5](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/504cda5f6c9f917e17ae4259604e862f9ae3fa2f))
+
 ## [1.4.1](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.4.0...v1.4.1) (2026-04-11)
 
 
