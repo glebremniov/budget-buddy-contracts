@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.0.0...v2.1.0) (2026-04-11)
+
+### Features
+
+* expose client.gen sub-path export in TypeScript package ([#65](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/65)) ([1fc217b](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/1fc217bf49d719a09321d7bdbc8e120c54871027))
+
 ## [2.0.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.4.2...v2.0.0) (2026-04-11)
 
 ### ⚠ BREAKING CHANGES
