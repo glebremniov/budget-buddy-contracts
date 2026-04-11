@@ -1,12 +1,10 @@
 # Budget Buddy Contracts 🚀
 
-[![OpenAPI Spec](https://img.shields.io/badge/OpenAPI-3.1.0-green.svg)](https://www.openapis.org/)
+[![OpenAPI Spec](https://img.shields.io/badge/OpenAPI-3.1.0-green.svg)](specs/openapi.yaml)
+[![Release Status](https://github.com/budget-buddy-org/budget-buddy-contracts/actions/workflows/release.yml/badge.svg)](https://github.com/budget-buddy-org/budget-buddy-contracts/actions/workflows/release.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/budget-buddy-org/budget-buddy-contracts)](https://github.com/budget-buddy-org/budget-buddy-contracts/releases)
-[![npm (GitHub Packages)](https://img.shields.io/badge/npm-pkg.github.com-blue.svg)](https://github.com/budget-buddy-org/budget-buddy-contracts/packages)
-[![Maven (GitHub Packages)](https://img.shields.io/badge/maven-pkg.github.com-blue.svg)](https://github.com/budget-buddy-org/budget-buddy-contracts/packages)
-[![Linting: Spectral](https://img.shields.io/badge/linting-spectral-blue.svg)](https://stoplight.io/open-source/spectral)
-[![Validation: OpenAPI Generator](https://img.shields.io/badge/validation-openapi--generator-orange.svg)](https://openapi-generator.tech/)
-[![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
+[![npm](https://img.shields.io/badge/npm-GPR-blue.svg?logo=npm)](https://github.com/budget-buddy-org/budget-buddy-contracts/pkgs/npm/budget-buddy-contracts)
+[![Maven](https://img.shields.io/badge/maven-GPR-blue.svg?logo=apachemaven)](https://github.com/budget-buddy-org/budget-buddy-contracts/packages/2953418)
 
 This repository serves as the **Single Source of Truth** for the Budget Buddy ecosystem. We use a "Contract-First" approach, where the API is defined in OpenAPI 3.1 and then used to generate strongly-typed clients and server interfaces for all supported platforms.
 
