@@ -6,9 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
+  contents: read
 
 jobs:
   release:
@@ -41,6 +39,12 @@ jobs:
           distribution: "temurin"
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Lint spec
+        run: pnpm run lint
+
+      - name: Validate spec
+        run: pnpm run validate
 
       - name: Run semantic-release
         env:
