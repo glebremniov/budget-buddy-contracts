@@ -10,6 +10,7 @@ import Foundation
 public struct CategoryWrite: Sendable, Codable, Hashable {
 
     public static let nameRule = StringRule(minLength: 1, maxLength: 255, pattern: nil)
+    /** Human-readable name for the category (1–255 characters). */
     public var name: String
 
     public init(name: String) {

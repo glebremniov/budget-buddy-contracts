@@ -147,8 +147,8 @@ open class TransactionsAPI {
     /**
      List transactions
      
-     - parameter limit: (query)  (optional, default to 20)
-     - parameter offset: (query)  (optional, default to 0)
+     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
+     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
@@ -167,8 +167,8 @@ open class TransactionsAPI {
      - Bearer Token:
        - type: http
        - name: BearerAuth
-     - parameter limit: (query)  (optional, default to 20)
-     - parameter offset: (query)  (optional, default to 0)
+     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
+     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)

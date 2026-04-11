@@ -139,8 +139,8 @@ open class CategoriesAPI {
     /**
      List categories
      
-     - parameter limit: (query)  (optional, default to 20)
-     - parameter offset: (query)  (optional, default to 0)
+     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
+     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedCategories
      */
@@ -155,8 +155,8 @@ open class CategoriesAPI {
      - Bearer Token:
        - type: http
        - name: BearerAuth
-     - parameter limit: (query)  (optional, default to 20)
-     - parameter offset: (query)  (optional, default to 0)
+     - parameter limit: (query) Maximum number of items to return. (optional, default to 20)
+     - parameter offset: (query) Number of items to skip before returning results. (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedCategories> 
      */

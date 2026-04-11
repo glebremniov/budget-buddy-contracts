@@ -11,7 +11,9 @@ public struct RegisterRequest: Sendable, Codable, Hashable {
 
     public static let usernameRule = StringRule(minLength: 3, maxLength: 50, pattern: nil)
     public static let passwordRule = StringRule(minLength: 8, maxLength: nil, pattern: nil)
+    /** Unique username chosen by the user (3–50 characters). */
     public var username: String
+    /** Account password (minimum 8 characters). */
     public var password: String
 
     public init(username: String, password: String) {

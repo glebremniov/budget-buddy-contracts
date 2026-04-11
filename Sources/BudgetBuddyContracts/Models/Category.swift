@@ -9,9 +9,13 @@ import Foundation
 
 public struct Category: Sendable, Codable, Hashable {
 
+    /** Unique identifier for the category. */
     public var id: UUID
+    /** Human-readable name of the category. */
     public var name: String
+    /** ISO 8601 timestamp when the category was created. */
     public var createdAt: Date?
+    /** ISO 8601 timestamp when the category was last updated. */
     public var updatedAt: Date?
 
     public init(id: UUID, name: String, createdAt: Date? = nil, updatedAt: Date? = nil) {

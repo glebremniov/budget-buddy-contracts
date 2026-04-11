@@ -9,7 +9,9 @@ import Foundation
 
 public struct LoginRequest: Sendable, Codable, Hashable {
 
+    /** The user's registered username. */
     public var username: String
+    /** The user's account password. */
     public var password: String
 
     public init(username: String, password: String) {

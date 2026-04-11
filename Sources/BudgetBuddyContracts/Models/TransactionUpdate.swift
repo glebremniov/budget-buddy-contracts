@@ -16,11 +16,17 @@ public struct TransactionUpdate: Sendable, Codable, Hashable {
     }
     public static let amountRule = NumericRule<Int>(minimum: 1, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public static let currencyRule = StringRule(minLength: 3, maxLength: 3, pattern: nil)
+    /** UUID of the category to reassign this transaction to. */
     public var categoryId: UUID?
+    /** New amount in minor units. Must be at least 1. */
     public var amount: Int?
+    /** New transaction type (EXPENSE or INCOME). */
     public var type: ModelType?
+    /** New ISO 4217 three-letter currency code. */
     public var currency: String?
+    /** New transaction date (YYYY-MM-DD). */
     public var date: Date?
+    /** Updated free-text note. Pass null to clear the existing note. */
     public var description: String?
 
     public init(categoryId: UUID? = nil, amount: Int? = nil, type: ModelType? = nil, currency: String? = nil, date: Date? = nil, description: String? = nil) {

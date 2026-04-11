@@ -14,15 +14,23 @@ public struct Transaction: Sendable, Codable, Hashable {
         case income = "INCOME"
     }
     public static let currencyRule = StringRule(minLength: 3, maxLength: 3, pattern: nil)
+    /** Unique identifier for the transaction. */
     public var id: UUID
+    /** UUID of the category this transaction belongs to. */
     public var categoryId: UUID
-    /** Amount in minor units */
+    /** Amount in minor units (e.g. 1299 = €12.99). */
     public var amount: Int64
+    /** Whether this transaction is an outgoing expense or incoming income. */
     public var type: ModelType
+    /** ISO 4217 three-letter currency code. */
     public var currency: String
+    /** Date on which the transaction occurred (YYYY-MM-DD). */
     public var date: Date
+    /** Optional free-text note for the transaction. */
     public var description: String?
+    /** ISO 8601 timestamp when the transaction record was created. */
     public var createdAt: Date?
+    /** ISO 8601 timestamp when the transaction record was last updated. */
     public var updatedAt: Date?
 
     public init(id: UUID, categoryId: UUID, amount: Int64, type: ModelType, currency: String, date: Date, description: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {

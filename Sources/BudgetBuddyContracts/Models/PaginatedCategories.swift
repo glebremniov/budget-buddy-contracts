@@ -9,7 +9,9 @@ import Foundation
 
 public struct PaginatedCategories: Sendable, Codable, Hashable {
 
+    /** The categories on the current page. */
     public var items: [Category]
+    /** Pagination metadata for the current response. */
     public var meta: PaginationMeta
 
     public init(items: [Category], meta: PaginationMeta) {

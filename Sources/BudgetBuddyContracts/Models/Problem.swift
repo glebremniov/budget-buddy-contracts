@@ -10,10 +10,15 @@ import Foundation
 /** RFC 9457 Problem Details */
 public struct Problem: Sendable, Codable, Hashable {
 
+    /** URI that identifies the problem type. Defaults to \"about:blank\" when not set. */
     public var type: String? = "about:blank"
+    /** Short, human-readable summary of the problem type. */
     public var title: String
+    /** HTTP status code for this occurrence of the problem. */
     public var status: Int
+    /** Human-readable explanation specific to this occurrence of the problem. */
     public var detail: String?
+    /** URI reference identifying the specific occurrence of the problem. */
     public var instance: String?
 
     public init(type: String? = "about:blank", title: String, status: Int, detail: String? = nil, instance: String? = nil) {

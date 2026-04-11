@@ -9,8 +9,11 @@ import Foundation
 
 public struct PaginationMeta: Sendable, Codable, Hashable {
 
+    /** The page size used for this response. */
     public var limit: Int
+    /** The number of items skipped before this page. */
     public var offset: Int
+    /** Total number of items matching the request across all pages. */
     public var total: Int64
 
     public init(limit: Int, offset: Int, total: Int64) {

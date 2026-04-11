@@ -9,7 +9,9 @@ import Foundation
 
 public struct PaginatedTransactions: Sendable, Codable, Hashable {
 
+    /** The transactions on the current page. */
     public var items: [Transaction]
+    /** Pagination metadata for the current response. */
     public var meta: PaginationMeta
 
     public init(items: [Transaction], meta: PaginationMeta) {

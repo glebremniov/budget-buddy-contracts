@@ -9,8 +9,11 @@ import Foundation
 
 public struct AuthToken: Sendable, Codable, Hashable {
 
+    /** JWT access token used in the Authorization header for subsequent requests. */
     public var accessToken: String
+    /** Token type, always \"Bearer\". */
     public var tokenType: String
+    /** Lifetime of the access token in seconds. */
     public var expiresIn: Int
     /** Opaque refresh token */
     public var refreshToken: String

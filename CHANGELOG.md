@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.4...v1.4.0) (2026-04-11)
+
+
+### Features
+
+* **spec:** add 500 responses, property descriptions, and strengthen Spectral rules (closes [#47](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/47)) ([#59](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/59)) ([7d3989a](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/7d3989a2c9fa96de7334ca541d6416937b40efa5))
+
 ## [1.3.4](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v1.3.3...v1.3.4) (2026-04-10)
 
 
