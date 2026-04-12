@@ -1,3 +1,9 @@
+## [2.1.1](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.1.0...v2.1.1) (2026-04-12)
+
+### Bug Fixes
+
+* **ci:** pin pnpm/action-setup to v5 and approve build scripts ([#70](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/70)) ([b5ca58b](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/b5ca58b73157cbf3fbc2002a3b998242bebde7eb))
+
 ## [2.1.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.0.0...v2.1.0) (2026-04-11)
 
 ### Features
