@@ -20,13 +20,16 @@ public struct Problem: Sendable, Codable, Hashable {
     public var detail: String?
     /** URI reference identifying the specific occurrence of the problem. */
     public var instance: String?
+    /** Optional list of specific errors (e.g., field-level validation errors). */
+    public var errors: [FieldError]?
 
-    public init(type: String? = "about:blank", title: String, status: Int, detail: String? = nil, instance: String? = nil) {
+    public init(type: String? = "about:blank", title: String, status: Int, detail: String? = nil, instance: String? = nil, errors: [FieldError]? = nil) {
         self.type = type
         self.title = title
         self.status = status
         self.detail = detail
         self.instance = instance
+        self.errors = errors
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -35,6 +38,7 @@ public struct Problem: Sendable, Codable, Hashable {
         case status
         case detail
         case instance
+        case errors
     }
 
     // Encodable protocol methods
@@ -46,6 +50,7 @@ public struct Problem: Sendable, Codable, Hashable {
         try container.encode(status, forKey: .status)
         try container.encodeIfPresent(detail, forKey: .detail)
         try container.encodeIfPresent(instance, forKey: .instance)
+        try container.encodeIfPresent(errors, forKey: .errors)
     }
 }
 

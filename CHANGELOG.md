@@ -1,3 +1,9 @@
+## [2.2.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.1.2...v2.2.0) (2026-04-12)
+
+### Features
+
+* **spec:** add errors field to Problem schema and regenerate Java models ([bfcaed4](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/bfcaed45b1d9057c1d2a6c9e224b76a878ce9989))
+
 ## [2.1.2](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.1.1...v2.1.2) (2026-04-12)
 
 ### Bug Fixes
