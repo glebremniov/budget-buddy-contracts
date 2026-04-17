@@ -9,10 +9,6 @@ import Foundation
 
 public struct Transaction: Sendable, Codable, Hashable {
 
-    public enum ModelType: String, Sendable, Codable, CaseIterable {
-        case expense = "EXPENSE"
-        case income = "INCOME"
-    }
     public static let currencyRule = StringRule(minLength: 3, maxLength: 3, pattern: nil)
     public static let descriptionRule = StringRule(minLength: nil, maxLength: 255, pattern: nil)
     /** Unique identifier for the transaction. */
@@ -22,7 +18,7 @@ public struct Transaction: Sendable, Codable, Hashable {
     /** Amount in minor units (e.g. 1299 = €12.99). */
     public var amount: Int64
     /** Whether this transaction is an outgoing expense or incoming income. */
-    public var type: ModelType
+    public var type: TransactionType
     /** ISO 4217 three-letter currency code. */
     public var currency: String
     /** Date on which the transaction occurred (YYYY-MM-DD). */
@@ -34,7 +30,7 @@ public struct Transaction: Sendable, Codable, Hashable {
     /** ISO 8601 timestamp when the transaction record was last updated. */
     public var updatedAt: Date?
 
-    public init(id: UUID, categoryId: UUID, amount: Int64, type: ModelType, currency: String, date: Date, description: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
+    public init(id: UUID, categoryId: UUID, amount: Int64, type: TransactionType, currency: String, date: Date, description: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
         self.id = id
         self.categoryId = categoryId
         self.amount = amount

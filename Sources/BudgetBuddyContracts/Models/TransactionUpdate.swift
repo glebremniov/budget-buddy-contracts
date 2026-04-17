@@ -10,10 +10,6 @@ import Foundation
 /** Patch request — only provided fields are updated. At least one field must be provided. */
 public struct TransactionUpdate: Sendable, Codable, Hashable {
 
-    public enum ModelType: String, Sendable, Codable, CaseIterable {
-        case expense = "EXPENSE"
-        case income = "INCOME"
-    }
     public static let amountRule = NumericRule<Int64>(minimum: 1, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public static let currencyRule = StringRule(minLength: 3, maxLength: 3, pattern: nil)
     public static let descriptionRule = StringRule(minLength: nil, maxLength: 255, pattern: nil)
@@ -21,8 +17,8 @@ public struct TransactionUpdate: Sendable, Codable, Hashable {
     public var categoryId: UUID?
     /** New amount in minor units. Must be at least 1. */
     public var amount: Int64?
-    /** New transaction type (EXPENSE or INCOME). */
-    public var type: ModelType?
+    /** New transaction type. */
+    public var type: TransactionType?
     /** New ISO 4217 three-letter currency code. */
     public var currency: String?
     /** New transaction date (YYYY-MM-DD). */
@@ -30,7 +26,7 @@ public struct TransactionUpdate: Sendable, Codable, Hashable {
     /** Updated free-text note (up to 255 characters). Pass null to clear the existing note. */
     public var description: String?
 
-    public init(categoryId: UUID? = nil, amount: Int64? = nil, type: ModelType? = nil, currency: String? = nil, date: Date? = nil, description: String? = nil) {
+    public init(categoryId: UUID? = nil, amount: Int64? = nil, type: TransactionType? = nil, currency: String? = nil, date: Date? = nil, description: String? = nil) {
         self.categoryId = categoryId
         self.amount = amount
         self.type = type

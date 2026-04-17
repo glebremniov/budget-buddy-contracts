@@ -1,3 +1,9 @@
+## [2.3.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.2.0...v2.3.0) (2026-04-17)
+
+### Features
+
+* **spec:** add TransactionType schema and type filter for list transactions ([#75](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/75)) ([b2510f5](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/b2510f589eebd5c870c2fa4055b9c5e9aec51658))
+
 ## [2.2.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.1.2...v2.2.0) (2026-04-12)
 
 ### Features

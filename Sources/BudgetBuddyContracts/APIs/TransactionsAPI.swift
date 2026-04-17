@@ -152,12 +152,13 @@ open class TransactionsAPI {
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
+     - parameter type: (query) Filter by transaction type (optional)
      - parameter sort: (query) Sort order (by date) (optional, default to .desc)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedTransactions
      */
-    open class func listTransactions(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedTransactions {
-        return try await listTransactionsWithRequestBuilder(page: page, size: size, categoryId: categoryId, start: start, end: end, sort: sort, apiConfiguration: apiConfiguration).execute().body
+    open class func listTransactions(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, type: TransactionType? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedTransactions {
+        return try await listTransactionsWithRequestBuilder(page: page, size: size, categoryId: categoryId, start: start, end: end, type: type, sort: sort, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -172,11 +173,12 @@ open class TransactionsAPI {
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
+     - parameter type: (query) Filter by transaction type (optional)
      - parameter sort: (query) Sort order (by date) (optional, default to .desc)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedTransactions> 
      */
-    open class func listTransactionsWithRequestBuilder(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedTransactions> {
+    open class func listTransactionsWithRequestBuilder(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, type: TransactionType? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedTransactions> {
         let localVariablePath = "/v1/transactions"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -188,6 +190,7 @@ open class TransactionsAPI {
             "categoryId": (wrappedValue: categoryId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "start": (wrappedValue: start?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "end": (wrappedValue: end?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "type": (wrappedValue: type?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
