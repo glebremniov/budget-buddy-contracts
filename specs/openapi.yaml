@@ -290,6 +290,11 @@ paths:
           schema:
             type: string
             format: date
+        - name: type
+          in: query
+          description: Filter by transaction type
+          schema:
+            $ref: "#/components/schemas/TransactionType"
         - name: sort
           in: query
           description: Sort order (by date)
@@ -624,6 +629,13 @@ components:
           maxLength: 255
           example: Dining
 
+    TransactionType:
+      type: string
+      description: Whether a transaction is an outgoing expense or incoming income.
+      enum:
+        - EXPENSE
+        - INCOME
+
     Transaction:
       type: object
       required: [ id, categoryId, amount, type, currency, date ]
@@ -642,11 +654,9 @@ components:
           description: Amount in minor units (e.g. 1299 = €12.99).
           example: 1299
         type:
-          type: string
           description: Whether this transaction is an outgoing expense or incoming income.
-          enum:
-            - EXPENSE
-            - INCOME
+          allOf:
+            - $ref: "#/components/schemas/TransactionType"
         currency:
           type: string
           description: ISO 4217 three-letter currency code.
@@ -687,9 +697,9 @@ components:
           minimum: 1
           example: 1299
         type:
-          type: string
           description: Whether this transaction is an outgoing expense or incoming income.
-          enum: [ EXPENSE, INCOME ]
+          allOf:
+            - $ref: "#/components/schemas/TransactionType"
         currency:
           type: string
           description: ISO 4217 three-letter currency code.
@@ -720,9 +730,9 @@ components:
           description: New amount in minor units. Must be at least 1.
           minimum: 1
         type:
-          type: string
-          description: New transaction type (EXPENSE or INCOME).
-          enum: [ EXPENSE, INCOME ]
+          description: New transaction type.
+          allOf:
+            - $ref: "#/components/schemas/TransactionType"
         currency:
           type: string
           description: New ISO 4217 three-letter currency code.
