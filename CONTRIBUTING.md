@@ -2,7 +2,14 @@
 
 ## Release process
 
-Releases are fully automated via semantic-release on push to `main`. See `CLAUDE.md` for the full workflow.
+Releases are fully automated from `main` using semantic-release.
+
+- A push to `main` triggers `release.yml`, which computes the next semantic version, creates the Git tag, and creates the GitHub Release.
+- The publish workflow (`publish.yml`) then publishes both package artifacts:
+  - `@budget-buddy-org/budget-buddy-contracts` (npm)
+  - `com.budget-buddy:budget-buddy-contracts` (Maven)
+
+`CLAUDE.md` may contain additional assistant-oriented context, but this document is the source of truth for contributor release operations.
 
 ## Recovery: partial publish failure
 
@@ -17,7 +24,10 @@ The `publish.yml` workflow runs two independent jobs in parallel — `publish-ty
 
 ### How to recover
 
-The `publish.yml` workflow supports `workflow_dispatch` for exactly this scenario. Re-running it from the release tag republishes both packages idempotently (GitHub Packages accepts re-publishing the same version of the Maven artifact; npm will reject a duplicate publish but the job will still succeed because `--no-git-checks` is used and the error is treated as non-fatal by pnpm publish if the version already exists).
+The `publish.yml` workflow supports `workflow_dispatch` for exactly this scenario. Re-run it from the release tag to republish both packages.
+
+For Maven, GitHub Packages accepts re-publishing the same artifact version, so this is idempotent.
+For npm, a duplicate publish is rejected, but the job still succeeds because `pnpm publish` treats an already-existing version as non-fatal in this workflow (`--no-git-checks` is used).
 
 **Steps:**
 
