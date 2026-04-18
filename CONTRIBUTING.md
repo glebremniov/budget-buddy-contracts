@@ -17,7 +17,10 @@ The `publish.yml` workflow runs two independent jobs in parallel — `publish-ty
 
 ### How to recover
 
-The `publish.yml` workflow supports `workflow_dispatch` for exactly this scenario. Re-running it from the release tag republishes both packages idempotently (GitHub Packages accepts re-publishing the same version of the Maven artifact; npm will reject a duplicate publish but the job will still succeed because `--no-git-checks` is used and the error is treated as non-fatal by pnpm publish if the version already exists).
+The `publish.yml` workflow supports `workflow_dispatch` for exactly this scenario. Re-run it from the release tag to republish both packages.
+
+For Maven, GitHub Packages accepts re-publishing the same artifact version, so this is idempotent.
+For npm, a duplicate publish is rejected, but the job still succeeds because `pnpm publish` treats an already-existing version as non-fatal in this workflow (`--no-git-checks` is used).
 
 **Steps:**
 
