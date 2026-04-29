@@ -18,4 +18,4 @@ useJakartaEe: true
 openApiNullable: true
 skipOperationExample: true
 sourceFolder: src/main/java
-# useJSpecify: true  # https://github.com/OpenAPITools/openapi-generator/pull/23256
+useJspecify: true
