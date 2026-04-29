@@ -1,3 +1,9 @@
+## [3.1.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.0.0...v3.1.0) (2026-04-29)
+
+### Features
+
+* bump OpenApi generator to enable useJspecify flag ([#87](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/87)) ([b0e69da](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/b0e69da9cca6df74fe5d589c577c68b29c352bbb))
+
 ## [3.0.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v2.3.0...v3.0.0) (2026-04-18)
 
 ### ⚠ BREAKING CHANGES
