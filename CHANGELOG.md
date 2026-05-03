@@ -1,3 +1,9 @@
+## [3.2.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.1.0...v3.2.0) (2026-05-03)
+
+### Features
+
+* add search and amount-range filters to listTransactions ([#91](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/91)) ([b8709e1](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/b8709e1f6ac1bb8b943aaa393b7ff352e0c15128)), closes [#88](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/88) [#88](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/88)
+
 ## [3.1.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.0.0...v3.1.0) (2026-04-29)
 
 ### Features

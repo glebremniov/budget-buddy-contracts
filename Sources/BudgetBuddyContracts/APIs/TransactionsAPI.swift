@@ -149,6 +149,9 @@ open class TransactionsAPI {
      
      - parameter page: (query) Zero-based page number. (optional, default to 0)
      - parameter size: (query) Maximum number of items to return. (optional, default to 20)
+     - parameter query: (query) Case-insensitive partial match against transaction description and category name (optional)
+     - parameter amountMin: (query) Filter to transactions with amount greater than or equal to this value, in minor units (e.g. 1299 &#x3D; €12.99) (optional)
+     - parameter amountMax: (query) Filter to transactions with amount less than or equal to this value, in minor units. Set equal to amountMin for an exact match (optional)
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
@@ -157,8 +160,8 @@ open class TransactionsAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedTransactions
      */
-    open class func listTransactions(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, type: TransactionType? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedTransactions {
-        return try await listTransactionsWithRequestBuilder(page: page, size: size, categoryId: categoryId, start: start, end: end, type: type, sort: sort, apiConfiguration: apiConfiguration).execute().body
+    open class func listTransactions(page: Int? = nil, size: Int? = nil, query: String? = nil, amountMin: Int64? = nil, amountMax: Int64? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, type: TransactionType? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedTransactions {
+        return try await listTransactionsWithRequestBuilder(page: page, size: size, query: query, amountMin: amountMin, amountMax: amountMax, categoryId: categoryId, start: start, end: end, type: type, sort: sort, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -170,6 +173,9 @@ open class TransactionsAPI {
        - name: BearerAuth
      - parameter page: (query) Zero-based page number. (optional, default to 0)
      - parameter size: (query) Maximum number of items to return. (optional, default to 20)
+     - parameter query: (query) Case-insensitive partial match against transaction description and category name (optional)
+     - parameter amountMin: (query) Filter to transactions with amount greater than or equal to this value, in minor units (e.g. 1299 &#x3D; €12.99) (optional)
+     - parameter amountMax: (query) Filter to transactions with amount less than or equal to this value, in minor units. Set equal to amountMin for an exact match (optional)
      - parameter categoryId: (query) Filter by category (optional)
      - parameter start: (query) Inclusive start date (optional)
      - parameter end: (query) Inclusive end date (optional)
@@ -178,7 +184,7 @@ open class TransactionsAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedTransactions> 
      */
-    open class func listTransactionsWithRequestBuilder(page: Int? = nil, size: Int? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, type: TransactionType? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedTransactions> {
+    open class func listTransactionsWithRequestBuilder(page: Int? = nil, size: Int? = nil, query: String? = nil, amountMin: Int64? = nil, amountMax: Int64? = nil, categoryId: UUID? = nil, start: Date? = nil, end: Date? = nil, type: TransactionType? = nil, sort: Sort_listTransactions? = nil, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<PaginatedTransactions> {
         let localVariablePath = "/v1/transactions"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -187,6 +193,9 @@ open class TransactionsAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "size": (wrappedValue: size?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "query": (wrappedValue: query?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "amountMin": (wrappedValue: amountMin?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "amountMax": (wrappedValue: amountMax?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "categoryId": (wrappedValue: categoryId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "start": (wrappedValue: start?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "end": (wrappedValue: end?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
