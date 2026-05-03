@@ -183,6 +183,26 @@ paths:
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/size"
+        - name: query
+          in: query
+          description: Case-insensitive partial match against transaction description and category name
+          schema:
+            type: string
+            maxLength: 255
+        - name: amountMin
+          in: query
+          description: Filter to transactions with amount greater than or equal to this value, in minor units (e.g. 1299 = €12.99)
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+        - name: amountMax
+          in: query
+          description: Filter to transactions with amount less than or equal to this value, in minor units. Set equal to amountMin for an exact match
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
         - name: categoryId
           in: query
           description: Filter by category
