@@ -1,3 +1,9 @@
+## [3.3.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.2.0...v3.3.0) (2026-05-06)
+
+### Features
+
+* add per-category monthly budget and spending summary endpoint ([#93](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/93)) ([868969d](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/868969d1a3bd68cd20dcf5a15c89c4e4d036e53f))
+
 ## [3.2.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.1.0...v3.2.0) (2026-05-03)
 
 ### Features

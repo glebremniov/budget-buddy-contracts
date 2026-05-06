@@ -10,15 +10,20 @@ import Foundation
 public struct CategoryWrite: Sendable, Codable, Hashable {
 
     public static let nameRule = StringRule(minLength: 1, maxLength: 255, pattern: nil)
+    public static let monthlyBudgetRule = NumericRule<Int64>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     /** Human-readable name for the category (1–255 characters). */
     public var name: String
+    /** Monthly spending budget for this category, in minor units. Omit or pass null for no budget. */
+    public var monthlyBudget: Int64?
 
-    public init(name: String) {
+    public init(name: String, monthlyBudget: Int64? = nil) {
         self.name = name
+        self.monthlyBudget = monthlyBudget
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case name
+        case monthlyBudget
     }
 
     // Encodable protocol methods
@@ -26,6 +31,7 @@ public struct CategoryWrite: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
+        try container.encodeIfPresent(monthlyBudget, forKey: .monthlyBudget)
     }
 }
 
