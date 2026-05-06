@@ -216,6 +216,47 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /v1/transactions/summary:
+    get:
+      tags: [ transactions ]
+      summary: Monthly income, expense, and balance summary
+      description: |
+        Returns monthly income, expense, and balance totals for a single calendar month, in a
+        single currency, scoped to the authenticated user.
+
+        Only transactions whose `currency` matches the requested currency contribute to `income`,
+        `expense`, `balance`, `incomeCount`, and `expenseCount`. Transactions in other currencies
+        are reflected in `excludedTransactionCount` so the UI can surface an informational note.
+      operationId: getTransactionsSummary
+      parameters:
+        - name: month
+          in: query
+          required: true
+          description: Calendar month to summarise, formatted YYYY-MM. Interpreted in UTC.
+          schema:
+            type: string
+            pattern: "^\\d{4}-(0[1-9]|1[0-2])$"
+            example: "2026-05"
+        - name: currency
+          in: query
+          required: true
+          description: ISO 4217 three-letter currency code. Only transactions in this currency contribute to income/expense.
+          schema:
+            $ref: "#/components/schemas/Currency"
+      responses:
+        "200":
+          description: Monthly summary for the requested month and currency
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonthlySummary"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /v1/transactions:
     get:
       tags: [ transactions ]
@@ -554,7 +595,8 @@ components:
 
     Currency:
       type: string
-      description: ISO 4217 three-letter currency code (uppercase).
+      description: ISO 4217 three-letter currency code (uppercase letters only).
+      pattern: "^[A-Z]{3}$"
       minLength: 3
       maxLength: 3
       example: EUR
@@ -753,6 +795,52 @@ components:
           description: One row per category owned by the authenticated user, including categories with zero spending.
           items:
             $ref: "#/components/schemas/CategorySpendingRow"
+
+    MonthlySummary:
+      type: object
+      required: [ month, currency, income, expense, balance, incomeCount, expenseCount, excludedTransactionCount ]
+      properties:
+        month:
+          type: string
+          pattern: "^\\d{4}-(0[1-9]|1[0-2])$"
+          description: Calendar month echoed back from the request, formatted YYYY-MM.
+          example: "2026-05"
+        currency:
+          description: ISO 4217 currency code echoed back from the request.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
+        income:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Sum of INCOME transactions in the requested currency for this month, in minor units.
+          example: 250000
+        expense:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Sum of EXPENSE transactions in the requested currency for this month, in minor units.
+          example: 132450
+        balance:
+          type: integer
+          format: int64
+          description: income minus expense, in minor units. May be negative.
+          example: 117550
+        incomeCount:
+          type: integer
+          minimum: 0
+          description: Number of INCOME transactions contributing to `income`.
+          example: 3
+        expenseCount:
+          type: integer
+          minimum: 0
+          description: Number of EXPENSE transactions contributing to `expense`.
+          example: 42
+        excludedTransactionCount:
+          type: integer
+          minimum: 0
+          description: Number of transactions (INCOME or EXPENSE) in this month whose currency did not match the requested currency and were therefore not summed.
+          example: 0
 
     PaginatedTransactions:
       type: object
