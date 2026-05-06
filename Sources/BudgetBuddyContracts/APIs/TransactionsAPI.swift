@@ -137,6 +137,52 @@ open class TransactionsAPI {
     }
 
     /**
+     Monthly income, expense, and balance summary
+     
+     - parameter month: (query) Calendar month to summarise, formatted YYYY-MM. Interpreted in UTC. 
+     - parameter currency: (query) ISO 4217 three-letter currency code. Only transactions in this currency contribute to income/expense. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: MonthlySummary
+     */
+    open class func getTransactionsSummary(month: String, currency: String, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) async throws(ErrorResponse) -> MonthlySummary {
+        return try await getTransactionsSummaryWithRequestBuilder(month: month, currency: currency, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Monthly income, expense, and balance summary
+     - GET /v1/transactions/summary
+     - Returns monthly income, expense, and balance totals for a single calendar month, in a single currency, scoped to the authenticated user.  Only transactions whose `currency` matches the requested currency contribute to `income`, `expense`, `balance`, `incomeCount`, and `expenseCount`. Transactions in other currencies are reflected in `excludedTransactionCount` so the UI can surface an informational note. 
+     - Bearer Token:
+       - type: http
+       - name: BearerAuth
+     - parameter month: (query) Calendar month to summarise, formatted YYYY-MM. Interpreted in UTC. 
+     - parameter currency: (query) ISO 4217 three-letter currency code. Only transactions in this currency contribute to income/expense. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<MonthlySummary> 
+     */
+    open class func getTransactionsSummaryWithRequestBuilder(month: String, currency: String, apiConfiguration: BudgetBuddyContractsAPIConfiguration = BudgetBuddyContractsAPIConfiguration.shared) -> RequestBuilder<MonthlySummary> {
+        let localVariablePath = "/v1/transactions/summary"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "month": (wrappedValue: month.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "currency": (wrappedValue: currency.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MonthlySummary>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      * enum for parameter sort
      */
     public enum Sort_listTransactions: String, Sendable, CaseIterable {

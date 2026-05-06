@@ -1,3 +1,9 @@
+## [3.4.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.3.0...v3.4.0) (2026-05-06)
+
+### Features
+
+* add GET /v1/transactions/summary for monthly totals ([#95](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/95)) ([7ed70af](https://github.com/budget-buddy-org/budget-buddy-contracts/commit/7ed70af61854d5f8a4a250a2ab7daef426c9b526)), closes [#94](https://github.com/budget-buddy-org/budget-buddy-contracts/issues/94)
+
 ## [3.3.0](https://github.com/budget-buddy-org/budget-buddy-contracts/compare/v3.2.0...v3.3.0) (2026-05-06)
 
 ### Features

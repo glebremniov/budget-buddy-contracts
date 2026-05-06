@@ -10,7 +10,7 @@ import Foundation
 public struct CategorySpendingSummary: Sendable, Codable, Hashable {
 
     public static let monthRule = StringRule(minLength: nil, maxLength: nil, pattern: "/^\\d{4}-(0[1-9]|1[0-2])$/")
-    public static let currencyRule = StringRule(minLength: 3, maxLength: 3, pattern: nil)
+    public static let currencyRule = StringRule(minLength: 3, maxLength: 3, pattern: "/^[A-Z]{3}$/")
     /** Calendar month echoed back from the request, formatted YYYY-MM. */
     public var month: String
     /** ISO 4217 currency code echoed back from the request. */
