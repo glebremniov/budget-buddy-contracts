@@ -109,10 +109,7 @@ paths:
           required: true
           description: ISO 4217 three-letter currency code. Only transactions in this currency contribute to `spent`.
           schema:
-            type: string
-            minLength: 3
-            maxLength: 3
-            example: EUR
+            $ref: "#/components/schemas/Currency"
       responses:
         "200":
           description: Per-category spending summary for the requested month and currency
@@ -555,6 +552,13 @@ components:
           description: New monthly budget in minor units. Pass null to clear an existing budget.
           example: 75000
 
+    Currency:
+      type: string
+      description: ISO 4217 three-letter currency code (uppercase).
+      minLength: 3
+      maxLength: 3
+      example: EUR
+
     TransactionType:
       type: string
       description: Whether a transaction is an outgoing expense or incoming income.
@@ -584,11 +588,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/TransactionType"
         currency:
-          type: string
           description: ISO 4217 three-letter currency code.
-          minLength: 3
-          maxLength: 3
-          example: EUR
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         date:
           type: string
           format: date
@@ -627,11 +629,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/TransactionType"
         currency:
-          type: string
           description: ISO 4217 three-letter currency code.
-          minLength: 3
-          maxLength: 3
-          example: EUR
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         date:
           type: string
           format: date
@@ -660,10 +660,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/TransactionType"
         currency:
-          type: string
           description: New ISO 4217 three-letter currency code.
-          minLength: 3
-          maxLength: 3
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         date:
           type: string
           format: date
@@ -746,11 +745,9 @@ components:
           description: Calendar month echoed back from the request, formatted YYYY-MM.
           example: "2026-05"
         currency:
-          type: string
-          minLength: 3
-          maxLength: 3
           description: ISO 4217 currency code echoed back from the request.
-          example: EUR
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         items:
           type: array
           description: One row per category owned by the authenticated user, including categories with zero spending.
